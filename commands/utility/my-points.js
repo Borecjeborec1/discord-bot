@@ -16,7 +16,7 @@ module.exports = {
             nubmer = i;
         }
     }
-    let exp =  Math.round(userListJson.userList[nubmer].voiceTime / 10000)
+    let exp = Math.round(userListJson.userList[index].voiceTime / 10000) + userListJson.userList[index].messageCount * 10
     if(msg.author.roles.cache.has("831185507962454038")) roleNum = 1
     if(msg.author.roles.cache.has("831185481424306206")) roleNum = 2
     if(msg.author.roles.cache.has("831185443470311435")) roleNum = 3

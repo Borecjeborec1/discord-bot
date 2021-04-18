@@ -233,7 +233,7 @@ const VETERANID = "831185399451484161"
 
 function checkForPromote(user){
   var index = findIndexOfUser(user)
-  let exp = Math.round(userListJson.userList[index].voiceTime / 10000)
+  let exp = Math.round(userListJson.userList[index].voiceTime / 10000) + userListJson.userList[index].messageCount * 10
   if(exp >= JUNIOR){
     user.member.roles.add(JUNIORID)
   }
