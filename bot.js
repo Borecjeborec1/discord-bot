@@ -1,14 +1,16 @@
 const fs = require('fs');
 const Discord = require('discord.js');
-const { prefix, token } = require('./config.json');
 const ytdl = require('ytdl-core');
-
+require("dotenv").config()
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
 
 let censoredWords = ['negr', '卐', 'pico', 'kurva', 'cigane', 'kokot', 'vagina'];
 let censoredWritted = false;
 let written = '';
+
+const prefix = "!"
+
 
 const usersMap = new Map();
 const LIMIT = 5;
@@ -73,7 +75,7 @@ client.on('message', (msg) => {
   }
 });
 
-client.login(token);
+client.login(process.env.BOT_TOKEN);
 
 function censoreWord(msg) {
   censoredWritted = false;
@@ -269,6 +271,3 @@ function addMsgToJSON(author){
   });
 }
 
-function checkForTwoPpl(newMember){
-   
-}
