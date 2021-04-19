@@ -18,7 +18,6 @@ module.exports = {
             if(msg.member.roles.cache.has("831185481424306206")) roleNum = 2
             if(msg.member.roles.cache.has("831185443470311435")) roleNum = 3
             if(msg.member.roles.cache.has("831185399451484161")) roleNum = 4
-            console.log(roleNum)
             switch(roleNum){
                 case 0:
                     needExp = JUNIOR - exp

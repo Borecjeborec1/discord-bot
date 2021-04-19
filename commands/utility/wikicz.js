@@ -7,18 +7,23 @@ module.exports = {
   args: true,
   usage: '<Arcticle name>',
   execute(msg, args,client) {
+    let argss = "";
+    for (let i = 0; i < args.length; i++){
+      argss += args[i] + " "
+    }
     msg.delete()
-    let data = wikipedia.fetch(args, 'cz').then((res) => {
+    let data = wikipedia.fetch(argss, 'cz').then((res) => {
       if(res){
         res = res.text();
         res = res.slice(0, 1000);
         const channel = client.channels.cache.get('832909289534128128')
-        let upperArgs = args[0].toUpperCase()
-        channel.send(`Search for ${upperArgs} \n${res}`)
+        let upperArgss = argss.toUpperCase()
+        channel.send(`Search for ${upperArgss} \n${res}`)
         return
+
       }
-      msg.reply(`I'm sorry, but nothing was searched under ${args}`)
-     
+       msg.reply(`I'm sorry, but nothing was searched under ${argss}`)
+      
     });
   },
 };

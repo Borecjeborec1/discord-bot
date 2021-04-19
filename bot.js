@@ -5,7 +5,7 @@ require("dotenv").config()
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
 
-let censoredWords = ['negr', '卐', 'pico', 'kurva', 'cigane', 'kokot', 'vagina'];
+let censoredWords = ['negr', '卐', 'pico', 'kurva', 'cigane', 'kokot', 'vagina', 'pica'];
 let censoredWritted = false;
 let written = '';
 
@@ -166,7 +166,6 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
   if (oldVoice != newVoice) {
     if (oldVoice == null) {
       memberTarget.push(newMember)
-      console.log(memberTarget.length)
       setTimeout(()=>{
         if(memberTarget.length === 1){
            return memberTarget[0].kick("cant connect alone")
@@ -192,7 +191,6 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
 function findIndexOfUser(user) {
   for (let i = 0; i < userListJson.userList.length; i++) {
     if (userListJson.userList[i].userID === user.id) {
-      console.log(i)
       return Number(i);
     }
   }
@@ -207,7 +205,6 @@ function findIndexOfUser(user) {
   fs.writeFile('./database/data.json', JSON.stringify(userListJson), function (err) {
     if (err) return console.log(err);
   });
-  console.log("id")
   return Number(0);
 }
 
@@ -222,7 +219,6 @@ function startTimer(newMember) {
 
 function endTimer(oldMember) {
   let index = findIndexOfUser(oldMember);
-  console.log(index)
   userListJson.userList[index].voiceTime += Date.now() - userListJson.userList[index].timeJoinChannel;
   userListJson.userList[index].timeJoinChannel = Date.now();
   fs.writeFile('./database/data.json', JSON.stringify(userListJson), function (err) {
@@ -236,29 +232,21 @@ const VETERANID = "831185399451484161"
 
 function checkForPromote(user){
   var index = findIndexOfUser(user)
-  console.log(user.id +" "+  index)
   let exp = Math.round(userListJson.userList[index].voiceTime / 10000) + userListJson.userList[index].messageCount * 10
-  console.log(exp)
   if(exp >= JUNIOR){
-  console.log(user.id +" added junior "+  index)
     user.roles.add(JUNIORID)
   }
   if(exp >= MID){
-  console.log(user.id +" added mid "+  index)
     user.roles.add(MIDID)
     user.roles.remove(JUNIORID)
   }
   if(exp >= SENIOR){
-  console.log(user.id +" added senior "+  index)
-
     user.roles.add(SENIORID)
     user.roles.remove(JUNIORID)
     user.roles.remove(MIDID)
 
   }
   if(exp >= VETERAN){
-  console.log(user.id +" added veteran "+  index)
-
     user.roles.add(VETERANID)
     user.roles.remove(SENIORID)
     user.roles.remove(JUNIORID)
@@ -271,7 +259,6 @@ function addMsgToJSON(author){
   let index;
   for (let i = 0; i < userListJson.userList.length; i++) {
     if (userListJson.userList[i].userID === author.id) {
-      console.log(`${i} => i in adding msg to JSON`)
       index = i;
       userListJson.userList[index].messageCount += 1;
       fs.writeFile('./database/data.json', JSON.stringify(userListJson), function (err) {
