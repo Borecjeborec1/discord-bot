@@ -113,14 +113,9 @@ function antiSpam(message) {
       usersMap.set(message.author.id, userData);
     } else {
       ++msgCount;
-      if (parseInt(msgCount) === LIMIT) {
-        const role = '831185882576060418';
-        message.member.roles.add(role);
-        message.reply('You have been muted.');
-        setTimeout(() => {
-          message.member.roles.remove(role);
-          message.reply('You have been unmuted');
-        }, TIME);
+      if (parseInt(msgCount) >= LIMIT) {
+        message.delete()
+
       } else {
         userData.msgCount = msgCount;
         usersMap.set(message.author.id, userData);
