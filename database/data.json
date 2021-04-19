@@ -1,1 +1,67 @@
-{"userList":[{"guildID":"830872303646408794","userID":"479664600250580992","messageCount":5252,"timeJoinChannel":1618814326895,"voiceTime":153172},{"guildID":"830872303646408794","userID":"832908180018167808","messageCount":0,"timeJoinChannel":1618766436172,"voiceTime":8676019},{"guildID":"830872303646408794","userID":"761339457114341427","messageCount":440,"timeJoinChannel":1618779418487,"voiceTime":274642},{"guildID":"830872303646408794","userID":"567071346534776873","messageCount":207,"timeJoinChannel":1618779830858,"voiceTime":745904},{"guildID":"830872303646408794","userID":"830872649386688544","messageCount":771,"timeJoinChannel":1618780059761,"voiceTime":555567},{"guildID":"830872303646408794","userID":"430784898635137024","messageCount":756,"timeJoinChannel":1618812768035,"voiceTime":216400},{"guildID":"830872303646408794","userID":"693905123210166295","messageCount":45,"timeJoinChannel":1618812250943,"voiceTime":0},{"guildID":"830872303646408794","userID":"819510455369465888","messageCount":120,"timeJoinChannel":1618812367344,"voiceTime":0},{"guildID":"830872303646408794","userID":"552471018128539648","messageCount":89,"timeJoinChannel":1618812751113,"voiceTime":59788}]}
+{
+  "userList": [
+    {
+      "guildID": "830872303646408794",
+      "userID": "479664600250580992",
+      "messageCount": 5252,
+      "timeJoinChannel": 1618814326895,
+      "voiceTime": 153172
+    },
+    {
+      "guildID": "830872303646408794",
+      "userID": "832908180018167808",
+      "messageCount": 0,
+      "timeJoinChannel": 1618766436172,
+      "voiceTime": 8676019
+    },
+    {
+      "guildID": "830872303646408794",
+      "userID": "761339457114341427",
+      "messageCount": 440,
+      "timeJoinChannel": 1618779418487,
+      "voiceTime": 274642
+    },
+    {
+      "guildID": "830872303646408794",
+      "userID": "567071346534776873",
+      "messageCount": 207,
+      "timeJoinChannel": 1618779830858,
+      "voiceTime": 745904
+    },
+    {
+      "guildID": "830872303646408794",
+      "userID": "830872649386688544",
+      "messageCount": 771,
+      "timeJoinChannel": 1618780059761,
+      "voiceTime": 555567
+    },
+    {
+      "guildID": "830872303646408794",
+      "userID": "430784898635137024",
+      "messageCount": 756,
+      "timeJoinChannel": 1618812768035,
+      "voiceTime": 216400
+    },
+    {
+      "guildID": "830872303646408794",
+      "userID": "693905123210166295",
+      "messageCount": 45,
+      "timeJoinChannel": 1618812250943,
+      "voiceTime": 0
+    },
+    {
+      "guildID": "830872303646408794",
+      "userID": "819510455369465888",
+      "messageCount": 120,
+      "timeJoinChannel": 1618812367344,
+      "voiceTime": 0
+    },
+    {
+      "guildID": "830872303646408794",
+      "userID": "552471018128539648",
+      "messageCount": 89,
+      "timeJoinChannel": 1618812751113,
+      "voiceTime": 59788
+    }
+  ]
+}
