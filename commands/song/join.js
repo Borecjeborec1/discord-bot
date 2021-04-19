@@ -3,6 +3,7 @@ module.exports = {
   description: 'Join the Bot',
   guildOnly: true,
   execute(msg, args, client) {
-    msg.member.voice.channel.join();
+    if(msg.member.voice) return msg.member.voice.channel.join();
+    msg.respond("You are not in voice channel")
   },
 };
