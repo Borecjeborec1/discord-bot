@@ -41,7 +41,8 @@ client.on('ready', () => console.log(`${client.user.tag} has logged in.`));
 client.on('message', (msg) => {
   censoreWord(msg);
   antiSpam(msg);
-  addMsgToJSON(msg.author.id)
+  addMsgToJSON(msg.author)
+  checkForPromote(msg.member)
 
   if (!msg.content.startsWith(`${prefix}`) || msg.author.bot) return;
 
@@ -170,10 +171,9 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
         if(memberTarget.length === 1){
            return memberTarget[0].kick("cant connect alone")
         }
-      },5000)
+      },50000)
 
       startTimer(newMember);
-      checkForPromote(newMember)
     } else if (newVoice == null) {
       memberTarget.pop()
       setTimeout(()=>{
@@ -181,8 +181,7 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
           memberTarget[0].kick("cant stay alone")
         }
         endTimer(oldMember);
-        checkForPromote(oldMember)
-      },5000)
+      },50000)
 
     } else {
       //Switched CHANNEL
@@ -192,7 +191,8 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
 
 function findIndexOfUser(user) {
   for (let i = 0; i < userListJson.userList.length; i++) {
-    if (userListJson.userList[i].guildID === user.guild.id && userListJson.userList[i].userID === user.id) {
+    if (userListJson.userList[i].userID === user.id) {
+      console.log(i)
       return Number(i);
     }
   }
@@ -207,7 +207,7 @@ function findIndexOfUser(user) {
   fs.writeFile('./database/data.json', JSON.stringify(userListJson), function (err) {
     if (err) return console.log(err);
   });
-
+  console.log("id")
   return Number(0);
 }
 
@@ -222,6 +222,7 @@ function startTimer(newMember) {
 
 function endTimer(oldMember) {
   let index = findIndexOfUser(oldMember);
+  console.log(index)
   userListJson.userList[index].voiceTime += Date.now() - userListJson.userList[index].timeJoinChannel;
   userListJson.userList[index].timeJoinChannel = Date.now();
   fs.writeFile('./database/data.json', JSON.stringify(userListJson), function (err) {
@@ -235,39 +236,49 @@ const VETERANID = "831185399451484161"
 
 function checkForPromote(user){
   var index = findIndexOfUser(user)
+  console.log(user.id +" "+  index)
   let exp = Math.round(userListJson.userList[index].voiceTime / 10000) + userListJson.userList[index].messageCount * 10
+  console.log(exp)
   if(exp >= JUNIOR){
-    user.member.roles.add(JUNIORID)
+  console.log(user.id +" added junior "+  index)
+    user.roles.add(JUNIORID)
   }
   if(exp >= MID){
-    user.member.roles.add(MIDID)
-    user.member.roles.remove(JUNIORID)
+  console.log(user.id +" added mid "+  index)
+    user.roles.add(MIDID)
+    user.roles.remove(JUNIORID)
   }
   if(exp >= SENIOR){
-    user.member.roles.add(SENIORID)
-    user.member.roles.remove(JUNIORID)
-    user.member.roles.remove(MIDID)
+  console.log(user.id +" added senior "+  index)
+
+    user.roles.add(SENIORID)
+    user.roles.remove(JUNIORID)
+    user.roles.remove(MIDID)
 
   }
   if(exp >= VETERAN){
-    user.member.roles.add(VETERANID)
-    user.member.roles.remove(SENIORID)
-    user.member.roles.remove(JUNIORID)
-    user.member.roles.remove(MIDID)
+  console.log(user.id +" added veteran "+  index)
+
+    user.roles.add(VETERANID)
+    user.roles.remove(SENIORID)
+    user.roles.remove(JUNIORID)
+    user.roles.remove(MIDID)
 
   }
 }
 
 function addMsgToJSON(author){
-  let index = 0
+  let index;
   for (let i = 0; i < userListJson.userList.length; i++) {
     if (userListJson.userList[i].userID === author.id) {
-        index = i;
+      console.log(`${i} => i in adding msg to JSON`)
+      index = i;
+      userListJson.userList[index].messageCount += 1;
+      fs.writeFile('./database/data.json', JSON.stringify(userListJson), function (err) {
+        if (err) return console.log(err);
+      });
     }
   }
-  userListJson.userList[index].messageCount += 1;
-  fs.writeFile('./database/data.json', JSON.stringify(userListJson), function (err) {
-    if (err) return console.log(err);
-  });
+  
 }
 
